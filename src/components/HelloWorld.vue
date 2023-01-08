@@ -10,7 +10,8 @@ const count = ref(0)
 type PeopleArray = Array<People>;
 
 const people: PeopleArray = Array<IListItem>(
-  { Name: 'RobP' }
+  { Name: 'RobP' },
+  { Name: 'Bob' }
 )
 </script>
 
