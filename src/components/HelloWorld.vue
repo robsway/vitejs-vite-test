@@ -1,13 +1,29 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { IListItem } from 'Interfaces/IListItem'
+import { Person } from 'Data/Person'
 
 defineProps<{ msg: string }>()
 
 const count = ref(0)
+
+type PeopleArray = Array<People>;
+
+const people: PeopleArray = Array<IListItem>(
+  { Name: 'RobP' }
+)
 </script>
 
 <template>
   <h1>{{ msg }}</h1>
+
+  <div class="card">
+    <ul>
+      <li v-for="person in people">
+        <div>{{person.Name}}</div>
+      </li>
+    </ul>
+  </div>
 
   <div class="card">
     <button type="button" @click="count++">count is {{ count }}</button>
