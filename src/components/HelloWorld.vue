@@ -3,9 +3,12 @@ import { ref } from 'vue'
 import { IListItem } from 'Interfaces/IListItem'
 import { Person } from 'Data/Person'
 
-defineProps<{ msg: string }>()
+const props = defineProps<{
+  msg: string,
+  initialCount: number
+}>()
 
-const count = ref(0)
+const count = ref(initialCount)
 
 type PeopleArray = Array<People>;
 

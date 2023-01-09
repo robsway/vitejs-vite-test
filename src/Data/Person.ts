@@ -1,4 +1,4 @@
-import type IListItem from './Interfaces/IListItem'
+import { IListItem } from '../Interfaces/IListItem'
 
 export class Person implements IListItem {
 
