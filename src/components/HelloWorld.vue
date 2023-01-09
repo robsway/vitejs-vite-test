@@ -3,10 +3,17 @@ import { ref } from 'vue'
 import { IListItem } from 'Interfaces/IListItem'
 import { Person } from 'Data/Person'
 
-const props = defineProps<{
-  msg: string,
-  initialCount: number
-}>()
+interface Props {
+  msgThing: string;
+  otherThing: string;
+  initialCount: number;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  msgThing: "string",
+  otherThing: "string",
+  initialCount: 2
+})
 
 const count = ref(initialCount)
 
@@ -19,7 +26,8 @@ const people: PeopleArray = Array<IListItem>(
 </script>
 
 <template>
-  <h1>{{ msg }}</h1>
+  <h1>{{ msgThing }}</h1>
+  <h1>{{ otherThing }}</h1>
 
   <div class="card">
     <ul>
