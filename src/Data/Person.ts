@@ -1,6 +1,6 @@
-import { IListItem } from '../Interfaces/IListItem'
+import { IPerson } from '../Interfaces/IPerson'
 
-export class Person implements IListItem {
+export class Person implements IPerson {
 
   private _name: string = "Bob";
 

@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue'
+
+const onChange = (val: number) => {
+  console.log(`Changed - ${val}`);
+}
 </script>
 
 <template>
@@ -11,7 +15,7 @@ import HelloWorld from './components/HelloWorld.vue'
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
-  <HelloWorld msgThing="Vite + Vue" otherThing="Blah" />
+  <HelloWorld MsgThing="Vite + Vue" OtherThing="Blah" @change="onChange"/>
 </template>
 
 <style scoped>

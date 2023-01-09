@@ -1,61 +1,63 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, provide, computed } from 'vue'
 import { IListItem } from 'Interfaces/IListItem'
-import { Person } from 'Data/Person'
+import { IPerson } from 'Interfaces/IPerson'
+import { Person } from '../Data/Person'
+import PersonComponent from './PersonComponent.vue'
 
-interface Props {
-  msgThing: string;
-  otherThing: string;
-  initialCount: number;
+interface ICommonProps {
+  MsgThing: string;
+  OtherThing: string;
+  InitialCount?: number;
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  msgThing: "string",
-  otherThing: "string",
-  initialCount: 2
+const props = withDefaults(defineProps<ICommonProps>(), {
+  MsgThing: "string",
+  OtherThing: "string",
+  InitialCount: 20
 })
 
-const count = ref(initialCount)
+const emit = defineEmits<{
+  (e: 'change', id: number): void
+  (e: 'update', value: string): void
+}>()
 
-type PeopleArray = Array<People>;
+const count = ref<number>(props.InitialCount)
 
-const people: PeopleArray = Array<IListItem>(
+const countTimesTwo = computed<number>(() => count.value * 2)
+
+provide('countTimesTwo', countTimesTwo)
+provide('testy', 'Hello from HelloWorld!')
+
+type PeopleArray = Array<IPerson>;
+
+const people: PeopleArray = Array<IPerson>(
   { Name: 'RobP' },
   { Name: 'Bob' }
 )
+
+const onClick = (arg: Event) => {
+  emit('change', count.value);
+  count.value++;
+};
 </script>
 
 <template>
-  <h1>{{ msgThing }}</h1>
-  <h1>{{ otherThing }}</h1>
+  <h2>{{ MsgThing }}</h2>
+  <h3>{{ OtherThing }}</h3>
 
   <div class="card">
     <ul>
       <li v-for="person in people">
-        <div>{{person.Name}}</div>
+        <PersonComponent :Person="person"/>
       </li>
     </ul>
   </div>
 
   <div class="card">
-    <button type="button" @click="count++">count is {{ count }}</button>
-    <p>
-      Edit
-      <code>components/HelloWorld.vue</code> to test HMR
-    </p>
+    <button type="button" @click="onClick">count is {{ count }}</button>
   </div>
 
-  <p>
-    Check out
-    <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank"
-      >create-vue</a
-    >, the official Vue + Vite starter
-  </p>
-  <p>
-    Install
-    <a href="https://github.com/johnsoncodehk/volar" target="_blank">Volar</a>
-    in your IDE for a better DX
-  </p>
   <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
 </template>
 
